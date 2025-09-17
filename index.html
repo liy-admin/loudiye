@@ -101,8 +101,7 @@
         </div>
     </div>
 
-    <!-- WhatsApp Rotation Script -->
-    <script src="whatsapp-integration.js"></script>
+    <!-- WhatsApp Rotation integrated directly -->
 
     <script>
         const modal = document.getElementById('modal');
@@ -134,17 +133,10 @@
             return window.location.origin; // 使用当前域名的 API
         }
 
-        // Initialize rotation when page loads
+        // Initialize when page loads
         document.addEventListener('DOMContentLoaded', function() {
-            try {
-                whatsappRotation = initWhatsAppRotation(WORKER_URL, {
-                    strategy: 'weighted_random',
-                    trackClicks: true,
-                    cacheTime: 30000 // 30秒缓存
-                });
-            } catch (error) {
-                console.warn('WhatsApp rotation initialization failed:', error);
-            }
+            console.log('WhatsApp rotation system initialized');
+            console.log('Worker URL:', WORKER_URL);
         });
 
         startBtn.addEventListener('click', function() {
@@ -197,20 +189,18 @@
 
                 let whatsappUrl = null;
 
-                // Try to get rotated link
-                if (whatsappRotation) {
-                    const result = await whatsappRotation.getWhatsAppLink();
-                    if (result && result.url) {
-                        whatsappUrl = result.url;
-                        console.log('Got WhatsApp rotation link:', result);
-
-                        // Track that we got a rotated link
-                        if (result.account && result.account.id) {
-                            setTimeout(() => {
-                                whatsappRotation.recordClick(result.account.id);
-                            }, 100);
+                // Try to get rotated link from API
+                try {
+                    const response = await fetch(WORKER_URL + '/api/whatsapp/link');
+                    if (response.ok) {
+                        const result = await response.json();
+                        if (result && result.url) {
+                            whatsappUrl = result.url;
+                            console.log('Got WhatsApp rotation link:', result);
                         }
                     }
+                } catch (apiError) {
+                    console.error('API call failed:', apiError);
                 }
 
                 // Fallback to default if rotation failed
