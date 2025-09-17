@@ -206,10 +206,8 @@ body {
     text-align: center;
     padding: 30px 0 25px 0;
     margin-top: 50px;
-    background: rgba(0, 0, 0, 0.3);
-    border-top: 1px solid rgba(255, 162, 0, 0.2);
-    border-radius: 0 0 20px 20px;
-    backdrop-filter: blur(10px);
+    background: transparent;
+    border-top: 1px solid rgba(255, 162, 0, 0.3);
 }
 
 .footer a {

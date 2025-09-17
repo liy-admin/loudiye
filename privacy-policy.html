@@ -6,116 +6,231 @@
     <title>Privacy Policy - AI Stock Price Prediction</title>
     <link rel="stylesheet" href="styles.css">
     <style>
+        body {
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            color: #ffffff;
+            min-height: 100vh;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
         .legal-page {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
-            padding: 40px 20px;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
+            padding: 50px 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
             margin-top: 40px;
             margin-bottom: 40px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 162, 0, 0.2);
         }
 
         .legal-page h1 {
-            color: #1a1a2e;
-            font-size: 2.5rem;
-            margin-bottom: 30px;
+            color: #ffffff;
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 40px;
             text-align: center;
             border-bottom: 3px solid #ffa200;
-            padding-bottom: 15px;
+            padding-bottom: 20px;
+            background: linear-gradient(135deg, #ffa200, #ff8c00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .legal-page h2 {
-            color: #1a1a2e;
-            font-size: 1.5rem;
-            margin-top: 35px;
-            margin-bottom: 15px;
+            color: #ffa200;
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            margin-top: 40px;
+            margin-bottom: 20px;
             border-left: 4px solid #ffa200;
-            padding-left: 15px;
+            padding-left: 20px;
+            background: rgba(255, 162, 0, 0.1);
+            padding: 15px 20px;
+            border-radius: 8px;
         }
 
         .legal-page h3 {
-            color: #333;
-            font-size: 1.2rem;
-            margin-top: 25px;
-            margin-bottom: 10px;
+            color: #ffffff;
+            font-size: clamp(1rem, 2.5vw, 1.4rem);
+            margin-top: 30px;
+            margin-bottom: 15px;
+            padding-left: 10px;
+            border-left: 2px solid #ffa200;
         }
 
         .legal-page p, .legal-page li {
-            color: #444;
-            line-height: 1.7;
-            margin-bottom: 12px;
-            font-size: 1rem;
+            color: #e0e0e0;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
         }
 
         .legal-page ul {
-            margin-left: 20px;
-            margin-bottom: 20px;
+            margin-left: 25px;
+            margin-bottom: 25px;
+        }
+
+        .legal-page li {
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .legal-page li::marker {
+            color: #ffa200;
+        }
+
+        .legal-page strong {
+            color: #ffa200;
+            font-weight: 600;
         }
 
         .info-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 20px 0;
-            background: #f8f9fa;
-            border-radius: 8px;
+            margin: 25px 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
             overflow: hidden;
+            border: 1px solid rgba(255, 162, 0, 0.3);
         }
 
         .info-table th, .info-table td {
-            padding: 12px 15px;
+            padding: 15px 12px;
             text-align: left;
-            border-bottom: 1px solid #dee2e6;
+            border-bottom: 1px solid rgba(255, 162, 0, 0.2);
         }
 
         .info-table th {
-            background: #ffa200;
-            color: white;
+            background: linear-gradient(135deg, #ffa200, #ff8c00);
+            color: #1a1a2e;
             font-weight: 600;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+        }
+
+        .info-table td {
+            color: #e0e0e0;
+            background: rgba(255, 255, 255, 0.03);
+            font-size: clamp(0.85rem, 1.8vw, 0.95rem);
         }
 
         .info-table tr:last-child td {
             border-bottom: none;
         }
 
+        .info-table tr:hover td {
+            background: rgba(255, 162, 0, 0.1);
+        }
+
         .back-link {
             display: inline-block;
-            margin-top: 30px;
-            padding: 12px 25px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
+            margin-top: 40px;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #ffa200, #ff8c00);
+            color: #1a1a2e;
             text-decoration: none;
-            border-radius: 25px;
+            border-radius: 30px;
             transition: all 0.3s;
-            font-weight: 500;
+            font-weight: 600;
+            font-size: 1.1rem;
+            box-shadow: 0 5px 20px rgba(255, 162, 0, 0.3);
         }
 
         .back-link:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 162, 0, 0.5);
+            background: linear-gradient(135deg, #ff8c00, #ffa200);
         }
 
+        /* Responsive Design */
         @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
             .legal-page {
-                margin: 20px;
-                padding: 30px 20px;
+                margin: 20px 0;
+                padding: 30px 25px;
+                border-radius: 15px;
             }
 
             .legal-page h1 {
-                font-size: 2rem;
+                margin-bottom: 30px;
+                padding-bottom: 15px;
             }
 
             .legal-page h2 {
-                font-size: 1.3rem;
+                margin-top: 30px;
+                margin-bottom: 15px;
+                padding: 12px 15px;
+            }
+
+            .legal-page h3 {
+                margin-top: 25px;
+                margin-bottom: 12px;
+            }
+
+            .legal-page ul {
+                margin-left: 20px;
             }
 
             .info-table {
-                font-size: 0.9rem;
+                font-size: 0.85rem;
+                margin: 20px 0;
             }
 
             .info-table th, .info-table td {
-                padding: 8px 10px;
+                padding: 10px 8px;
+            }
+
+            .back-link {
+                padding: 12px 25px;
+                font-size: 1rem;
+                margin-top: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .legal-page {
+                padding: 25px 20px;
+                margin: 15px 0;
+            }
+
+            .legal-page h2 {
+                padding: 10px 12px;
+            }
+
+            .legal-page ul {
+                margin-left: 15px;
+            }
+
+            .info-table {
+                font-size: 0.8rem;
+            }
+
+            .info-table th, .info-table td {
+                padding: 8px 6px;
+            }
+
+            .back-link {
+                width: 100%;
+                text-align: center;
+                padding: 12px 20px;
+            }
+        }
+
+        /* Extra small screens */
+        @media (max-width: 360px) {
+            .info-table {
+                font-size: 0.75rem;
+            }
+
+            .info-table th, .info-table td {
+                padding: 6px 4px;
             }
         }
     </style>
