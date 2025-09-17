@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025 Most Powerful AI Stock Price Prediction</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="main-content">
+            <h1 class="title">
+                <span class="year">2025</span> Most Powerful AI
+            </h1>
+            <h2 class="subtitle">Stock Price Prediction</h2>
+
+            <p class="accuracy">Prediction Accuracy Reaches <span class="percentage">99.8%</span></p>
+
+            <div class="robot-container">
+                <img src="ai-robot.svg" alt="AI Robot" class="ai-robot">
+            </div>
+
+            <input type="text" class="stock-input" placeholder="Enter stock code" />
+            <button class="start-btn">Start Analysis</button>
+
+            <p class="description">
+                Enter your stock code or interested stock code below, and the AI system will complete the analysis within 1.5 seconds.
+            </p>
+
+            <p class="viewers">
+                Currently, <span class="count">46,863</span> people are viewing the complete report for free!
+            </p>
+
+            <div class="features">
+                <div class="feature-item">
+                    <span class="feature-icon">📊</span>
+                    <span>Market Analysis</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">📈</span>
+                    <span>Chart Analysis</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">📰</span>
+                    <span>News Analysis</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">📋</span>
+                    <span>Stock Analysis Report</span>
+                </div>
+            </div>
+
+            <a href="#" class="whatsapp-btn" style="display: none;">
+                Receive Analysis Report for Free via WhatsApp
+            </a>
+        </div>
+
+        <footer class="footer">
+            <a href="#">Terms of Use</a>
+            <span>|</span>
+            <a href="#">Privacy Policy</a>
+        </footer>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+
+            <!-- Progress Content -->
+            <div id="progress-content" class="modal-body">
+                <h2>AI Analysis in Progress</h2>
+                <div class="progress-item">
+                    <span>Market Analysis</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress1"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <span>Chart Analysis</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress2"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <span>News Analysis</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress3"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- WhatsApp Content -->
+            <div id="whatsapp-content" class="modal-body" style="display: none;">
+                <h2>Stock Analysis Report is Ready</h2>
+                <p>To get a detailed stock report, please add the AI assistant. You will also receive today's 3 recommended quality stocks.</p>
+                <a href="https://wa.me/" target="_blank" class="whatsapp-modal-btn" id="whatsapp-link" data-whatsapp-rotation="true">
+                    <span id="whatsapp-text">Receive Analysis Report for Free via WhatsApp</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- WhatsApp Rotation Script -->
+    <script src="whatsapp-integration.js"></script>
+
+    <script>
+        const modal = document.getElementById('modal');
+        const startBtn = document.querySelector('.start-btn');
+        const closeBtn = document.querySelector('.close');
+        const progressContent = document.getElementById('progress-content');
+        const whatsappContent = document.getElementById('whatsapp-content');
+        const whatsappLink = document.getElementById('whatsapp-link');
+        const whatsappText = document.getElementById('whatsapp-text');
+
+        // Initialize WhatsApp rotation
+        // 从环境变量或配置中获取 Worker URL
+        const WORKER_URL = getWorkerUrl();
+        let whatsappRotation = null;
+
+        // 获取 Worker API URL
+        function getWorkerUrl() {
+            // 如果在构建时注入了环境变量
+            if (typeof WORKER_API_URL !== 'undefined') {
+                return WORKER_API_URL;
+            }
+
+            // 开发环境检测
+            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                return 'http://localhost:8787'; // 本地 Wrangler dev 地址
+            }
+
+            // 生产环境 - 使用 Pages Functions
+            return window.location.origin; // 使用当前域名的 API
+        }
+
+        // Initialize rotation when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                whatsappRotation = initWhatsAppRotation(WORKER_URL, {
+                    strategy: 'weighted_random',
+                    trackClicks: true,
+                    cacheTime: 30000 // 30秒缓存
+                });
+            } catch (error) {
+                console.warn('WhatsApp rotation initialization failed:', error);
+            }
+        });
+
+        startBtn.addEventListener('click', function() {
+            modal.style.display = 'flex';
+            progressContent.style.display = 'block';
+            whatsappContent.style.display = 'none';
+
+            // Reset progress bars
+            document.getElementById('progress1').style.width = '0%';
+            document.getElementById('progress2').style.width = '0%';
+            document.getElementById('progress3').style.width = '0%';
+
+            // Animate progress bars
+            setTimeout(() => {
+                document.getElementById('progress1').style.width = '100%';
+            }, 100);
+            setTimeout(() => {
+                document.getElementById('progress2').style.width = '100%';
+            }, 500);
+            setTimeout(() => {
+                document.getElementById('progress3').style.width = '100%';
+            }, 900);
+
+            // Switch to WhatsApp content after 1.5 seconds
+            setTimeout(async () => {
+                // Update WhatsApp link before showing content
+                await updateWhatsAppLink();
+
+                progressContent.style.display = 'none';
+                whatsappContent.style.display = 'block';
+            }, 1500);
+        });
+
+        closeBtn.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // Update WhatsApp link with rotation
+        async function updateWhatsAppLink() {
+            try {
+                // Show loading state
+                whatsappText.textContent = 'Loading WhatsApp link...';
+                whatsappLink.style.opacity = '0.7';
+
+                let whatsappUrl = null;
+
+                // Try to get rotated link
+                if (whatsappRotation) {
+                    const result = await whatsappRotation.getWhatsAppLink();
+                    if (result && result.url) {
+                        whatsappUrl = result.url;
+                        console.log('Got WhatsApp rotation link:', result);
+
+                        // Track that we got a rotated link
+                        if (result.account && result.account.id) {
+                            setTimeout(() => {
+                                whatsappRotation.recordClick(result.account.id);
+                            }, 100);
+                        }
+                    }
+                }
+
+                // Fallback to default if rotation failed
+                if (!whatsappUrl) {
+                    whatsappUrl = generateFallbackWhatsAppLink();
+                    console.log('Using fallback WhatsApp link');
+                }
+
+                // Update the link
+                whatsappLink.href = whatsappUrl;
+
+                // Restore original text and style
+                whatsappText.textContent = 'Receive Analysis Report for Free via WhatsApp';
+                whatsappLink.style.opacity = '1';
+
+            } catch (error) {
+                console.error('Failed to update WhatsApp link:', error);
+
+                // Use fallback link
+                whatsappLink.href = generateFallbackWhatsAppLink();
+                whatsappText.textContent = 'Receive Analysis Report for Free via WhatsApp';
+                whatsappLink.style.opacity = '1';
+            }
+        }
+
+        // Generate fallback WhatsApp link
+        function generateFallbackWhatsAppLink() {
+            const message = encodeURIComponent('Hello, I need the stock analysis report. Please send me today\'s 3 recommended quality stocks.');
+            return `https://wa.me/?text=${message}`;
+        }
+
+        // Add click tracking to WhatsApp link
+        whatsappLink.addEventListener('click', function() {
+            // Track click for analytics
+            console.log('WhatsApp link clicked');
+
+            // Optional: Send tracking data
+            try {
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'click', {
+                        'event_category': 'WhatsApp',
+                        'event_label': 'Stock Analysis Report'
+                    });
+                }
+            } catch (e) {
+                // Ignore tracking errors
+            }
+        });
+    </script>
+</body>
+</html>
