@@ -19,10 +19,18 @@ export async function onRequest(context) {
     // 从 KV 读取 ws1, ws2, ws3
     const links = await getWhatsAppLinksFromKV(env);
 
+    // 调试信息
+    console.log('KV binding available:', !!env.WHATSAPP_LINKS);
+    console.log('Found links:', links);
+
     if (!links || links.length === 0) {
       return new Response(JSON.stringify({
         error: 'No WhatsApp links configured',
-        fallbackUrl: 'https://wa.me/?text=Hello'
+        fallbackUrl: 'https://wa.me/?text=Hello',
+        debug: {
+          kvBinding: !!env.WHATSAPP_LINKS,
+          foundLinks: links
+        }
       }), {
         status: 503,
         headers
@@ -62,6 +70,7 @@ async function getWhatsAppLinksFromKV(env) {
     for (const key of keys) {
       try {
         const value = await env.WHATSAPP_LINKS.get(key);
+        console.log(`Reading ${key}:`, value);
         if (value && value.trim()) {
           links.push(value.trim());
         }
