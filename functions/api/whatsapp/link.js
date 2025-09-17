@@ -20,8 +20,8 @@ export async function onRequest(context) {
     const links = await getWhatsAppLinksFromKV(env);
 
     // 调试信息
-    console.log('KV binding available:', !!env.WHATSAPP_LINKS);
-    console.log('Found links:', links);
+    // console.log('KV binding available:', !!env.WHATSAPP_LINKS);
+    // console.log('Found links:', links);
 
     if (!links || links.length === 0) {
       return new Response(JSON.stringify({
