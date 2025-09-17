@@ -6,22 +6,22 @@
     <title>2025 Most Powerful AI Stock Price Prediction</title>
     <link rel="stylesheet" href="styles.css">
 
-    <!-- Dynamic Analytics Script -->
+    <!-- Google Analytics -->
+    <script id="gtag-script"></script>
     <script>
-        // Load analytics from KV
         fetch('/api/analytics').then(r => r.json()).then(data => {
             if (data.enabled && data.trackingId) {
-                const script = document.createElement('script');
-                script.async = true;
-                script.src = `https://www.googletagmanager.com/gtag/js?id=${data.trackingId}`;
-                document.head.appendChild(script);
-
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', data.trackingId);
+                document.getElementById('gtag-script').outerHTML = `
+                    <script async src="https://www.googletagmanager.com/gtag/js?id=${data.trackingId}"></script>
+                    <script>
+                      window.dataLayer = window.dataLayer || [];
+                      function gtag(){dataLayer.push(arguments);}
+                      gtag('js', new Date());
+                      gtag('config', '${data.trackingId}');
+                    </script>
+                `;
             }
-        }).catch(() => {}); // Silent fail
+        }).catch(() => {});
     </script>
 </head>
 <body>

@@ -12,11 +12,11 @@ export async function onRequest(context) {
     }
 
     const enabled = await env.WHATSAPP_LINKS.get('GA_ENABLED') === 'true';
-    const trackingId = await env.WHATSAPP_LINKS.get('GA_TRACKING_ID');
+    const trackingId = await env.WHATSAPP_LINKS.get('GA_TRACKING_ID') || 'AW-17577400618';
 
     return new Response(JSON.stringify({
-      enabled: enabled && trackingId,
-      trackingId: trackingId || null
+      enabled: enabled,
+      trackingId: trackingId
     }), { headers });
 
   } catch (error) {
