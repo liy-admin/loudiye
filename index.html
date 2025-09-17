@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,23 +8,17 @@
     <link rel="stylesheet" href="styles.css">
 
     <!-- Google Analytics -->
-    <script id="gtag-script"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17577400618"></script>
     <script>
-        fetch('/api/analytics').then(r => r.json()).then(data => {
-            if (data.enabled && data.trackingId) {
-                document.getElementById('gtag-script').outerHTML = `
-                    <script async src="https://www.googletagmanager.com/gtag/js?id=${data.trackingId}"></script>
-                    <script>
-                      window.dataLayer = window.dataLayer || [];
-                      function gtag(){dataLayer.push(arguments);}
-                      gtag('js', new Date());
-                      gtag('config', '${data.trackingId}');
-                    </script>
-                `;
-            }
-        }).catch(() => {});
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'AW-17577400618');
     </script>
 </head>
+
 <body>
     <div class="container">
         <div class="main-content">
@@ -42,10 +37,12 @@
             <button class="start-btn">Start Analysis</button>
 
             <p class="description">
-                Enter your stock code or interested stock code below, and the AI system will complete the analysis within 1.5 seconds.
+                Enter your stock code or interested stock code below, and the AI system will complete the analysis
+                within 1.5 seconds.
 
-            </br>Backed by 40 seasoned Wall Street analysts, we deliver professional insights into global markets, stocks, and cryptocurrencies.
-Our advanced    AI quantitative trading platform is now available for free trial.
+                </br>Backed by 40 seasoned Wall Street analysts, we deliver professional insights into global markets,
+                stocks, and cryptocurrencies.
+                Our advanced AI quantitative trading platform is now available for free trial.
             </p>
 
             <p class="viewers">
@@ -114,8 +111,10 @@ Our advanced    AI quantitative trading platform is now available for free trial
             <!-- WhatsApp Content -->
             <div id="whatsapp-content" class="modal-body" style="display: none;">
                 <h2>Stock Analysis Report is Ready</h2>
-                <p>To get a detailed stock report, please add the AI assistant. You will also receive today's 3 recommended quality stocks.</p>
-                <a href="https://wa.me/" target="_blank" class="whatsapp-modal-btn" id="whatsapp-link" data-whatsapp-rotation="true">
+                <p>To get a detailed stock report, please add the AI assistant. You will also receive today's 3
+                    recommended quality stocks.</p>
+                <a href="https://wa.me/" target="_blank" class="whatsapp-modal-btn" id="whatsapp-link"
+                    data-whatsapp-rotation="true">
                     <span id="whatsapp-text">Receive Analysis Report for Free via WhatsApp</span>
                 </a>
             </div>
@@ -155,12 +154,12 @@ Our advanced    AI quantitative trading platform is now available for free trial
         }
 
         // Initialize when page loads
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             console.log('WhatsApp rotation system initialized');
             console.log('Worker URL:', WORKER_URL);
         });
 
-        startBtn.addEventListener('click', function() {
+        startBtn.addEventListener('click', function () {
             modal.style.display = 'flex';
             progressContent.style.display = 'block';
             whatsappContent.style.display = 'none';
@@ -191,11 +190,11 @@ Our advanced    AI quantitative trading platform is now available for free trial
             }, 1500);
         });
 
-        closeBtn.addEventListener('click', function() {
+        closeBtn.addEventListener('click', function () {
             modal.style.display = 'none';
         });
 
-        window.addEventListener('click', function(e) {
+        window.addEventListener('click', function (e) {
             if (e.target === modal) {
                 modal.style.display = 'none';
             }
@@ -254,7 +253,7 @@ Our advanced    AI quantitative trading platform is now available for free trial
         }
 
         // Add click tracking to WhatsApp link
-        whatsappLink.addEventListener('click', function() {
+        whatsappLink.addEventListener('click', function () {
             // Track click for analytics
             console.log('WhatsApp link clicked');
 
@@ -272,4 +271,5 @@ Our advanced    AI quantitative trading platform is now available for free trial
         });
     </script>
 </body>
+
 </html>
