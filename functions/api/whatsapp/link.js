@@ -63,19 +63,25 @@ async function getWhatsAppLinksFromKV(env) {
       return [];
     }
 
-    const keys = ['ws1', 'ws2', 'ws3'];
     const links = [];
+    let index = 1;
 
-    // 读取每个键的值
-    for (const key of keys) {
+    // 动态遍历 ws+数字 的 key
+    while (true) {
+      const key = `ws${index}`;
       try {
         const value = await env.WHATSAPP_LINKS.get(key);
         console.log(`Reading ${key}:`, value);
         if (value && value.trim()) {
           links.push(value.trim());
+          index++;
+        } else {
+          // 如果没有值则停止遍历
+          break;
         }
       } catch (error) {
         console.error(`Error reading ${key}:`, error);
+        break;
       }
     }
 
