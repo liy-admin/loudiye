@@ -1,12 +1,12 @@
 // 简化的时区中间件
 export async function onRequest(context) {
   try {
-    const { request, env } = context;
+    const { request, env, next } = context;
     const url = new URL(request.url);
 
     // 只检查根页面，跳过所有其他路径
     if (url.pathname !== '/') {
-      return;
+      return next();
     }
 
     // 检查 KV 中的 UTC 设置
@@ -22,7 +22,7 @@ export async function onRequest(context) {
 
     // 如果设置为 off，直接允许访问
     if (utcSetting !== 'on') {
-      return;
+      return next();
     }
 
     // 简单的地区检测
@@ -38,11 +38,11 @@ export async function onRequest(context) {
     }
 
     console.log('US access allowed');
-    return;
+    return next();
 
   } catch (error) {
     console.error('Middleware error:', error);
     // 出错时允许访问
-    return;
+    return next();
   }
 }
